@@ -1,0 +1,11 @@
+Model Information:
+* title:	Mew Model
+* source:	https://sketchfab.com/3d-models/mew-model-5acd365f0b46430f886f00c6771b45c9
+* author:	AbsolMoonWolf (https://sketchfab.com/AbsolMoonWolf)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Mew Model" (https://sketchfab.com/3d-models/mew-model-5acd365f0b46430f886f00c6771b45c9) by AbsolMoonWolf (https://sketchfab.com/AbsolMoonWolf) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

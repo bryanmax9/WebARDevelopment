@@ -1,0 +1,11 @@
+Model Information:
+* title:	Armored Mewtwo
+* source:	https://sketchfab.com/3d-models/armored-mewtwo-c6b33181a5f149228be85be2d92c8e57
+* author:	projectmgame (https://sketchfab.com/projectmgame)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Armored Mewtwo" (https://sketchfab.com/3d-models/armored-mewtwo-c6b33181a5f149228be85be2d92c8e57) by projectmgame (https://sketchfab.com/projectmgame) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
       maxTrack: 2,
       warmupTolerance: 2,
       missTolerance: 2,
-    }); 5y0
+    });
     const { renderer, scene, camera } = mindARThree;
 
     const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);

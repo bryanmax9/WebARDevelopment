@@ -38,11 +38,60 @@
         height: 100vh;
         max-width: 960px;
         margin: 0 auto; /* centers horizontally */
+        overflow: hidden;
+      }
+
+      /* Custom scanning UI overlay */
+      #scan-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: min(260px, 70vw);
+        padding: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        background: rgba(0, 0, 0, 0.45);
+        border-radius: 0.9rem;
+        transition: opacity 200ms ease;
+        pointer-events: auto;
+        z-index: 10;
+      }
+
+      #scan-overlay.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      #scan-overlay img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0.75rem;
+        filter: blur(2px) brightness(1.1);
+        opacity: 0.85;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
+      }
+
+      #scan-overlay p {
+        margin: 0;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #e5e7eb;
+        text-align: center;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
       }
     </style>
   </head>
   <body>
     <h1>Image Tracking</h1>
-    <div id="ar-container"></div>
+    <div id="ar-container">
+      <div id="scan-overlay">
+        <img src="./ancientMew.jpeg" alt="Scan this card" />
+        <p>Point your camera at this card to start</p>
+      </div>
+    </div>
   </body>
 </html>

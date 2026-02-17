@@ -8,14 +8,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const mindarThree = new MindARThree({
       container: document.getElementById("ar-container"),
       imageTargetSrc: "./targets.mind", // path to the image target that was sentizised on "https://hiukim.github.io/mind-ar-js-doc/tools/compile/"
+      uiScanning: false,
+      uiLoading: "no",
     });
 
     const { renderer, scene, camera } = mindarThree;
+    const scanOverlay = document.getElementById("scan-overlay");
 
     const video = await loadVideo("./mew_GreenScreen.mp4");
     const texture = new THREE.VideoTexture(video);
     const geometry = new THREE.PlaneGeometry(1, 1080 / 1920);
-    const material = createChromaMaterial(texture, "#00ff00");
+    // tweak threshold/smoothness/cropBottom if you still see a green line
+    const material = createChromaMaterial(
+      texture,
+      "#00ff00",
+      0.42, // threshold
+      0.25, // smoothness
+      0.12, // cropBottom: cut bottom 12% of the video (removes the line)
+      1.0, // cropTop
+    );
     const plane = new THREE.Mesh(geometry, material);
 
     plane.rotation.x = Math.PI / 2;
@@ -30,15 +41,23 @@ document.addEventListener("DOMContentLoaded", () => {
       video.currentTime = 6;
     });
 
-    // Play/pause video based on anchor visibility (MindAR Three.js has no onTargetFound/onTargetLost)
+    // Play/pause video and toggle scanning UI based on anchor visibility
     let wasVisible = false;
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
       const visible = anchor.group.visible;
-      if (visible && !wasVisible) video.play();
-      if (!visible && wasVisible) video.pause();
-      wasVisible = visible;
 
+      if (visible && !wasVisible) {
+        video.play();
+        if (scanOverlay) scanOverlay.classList.add("hidden");
+      }
+
+      if (!visible && wasVisible) {
+        video.pause();
+        if (scanOverlay) scanOverlay.classList.remove("hidden");
+      }
+
+      wasVisible = visible;
       renderer.render(scene, camera);
     });
   };

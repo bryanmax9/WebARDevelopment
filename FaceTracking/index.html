@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.132.2/examples/jsm/"
+        }
+      }
+    </script>
+    <script src="./libs/mindar/mindar-face-three.prod.js"></script>
+    <script src="./main.js" type="module"></script>
+    <link rel="stylesheet" href="./styles.css">
+    <title>Face Recognition</title>
+</head>
+<body>
+    <div id="mask-selector">
+        <button id="btn-freddy" class="mask-btn active">
+            <img src="./logos/freedieLogo.png" alt="Freddy">
+            <span>Freddy</span>
+        </button>
+        <button id="btn-batman" class="mask-btn">
+            <img src="./logos/batmanLogo.png" alt="Batman">
+            <span>Batman</span>
+        </button>
+    </div>
+</body>
+</html>

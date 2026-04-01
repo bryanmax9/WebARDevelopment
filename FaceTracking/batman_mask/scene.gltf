@@ -1,0 +1,250 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 2160,
+      "max": [
+        0.08571139723062515,
+        0.05267960950732231,
+        0.22850081324577332
+      ],
+      "min": [
+        -0.08571139723062515,
+        -0.05602075159549713,
+        0.0028262243140488863
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 25920,
+      "componentType": 5126,
+      "count": 2160,
+      "max": [
+        0.9998138546943665,
+        0.48941484093666077,
+        0.9774300456047058
+      ],
+      "min": [
+        -0.9998138546943665,
+        -0.9995349645614624,
+        -0.9442076086997986
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 2160,
+      "max": [
+        1.0,
+        0.9988718628883362,
+        0.9789261817932129,
+        1.0
+      ],
+      "min": [
+        -0.015783024951815605,
+        -0.9888233542442322,
+        -0.9745633602142334,
+        -1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 2160,
+      "max": [
+        1.0,
+        1.0
+      ],
+      "min": [
+        0.0001068115234375,
+        0.2694053053855896
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 10440,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "David Wigforss (https://sketchfab.com/dwigfor)",
+      "license": "CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)",
+      "source": "https://sketchfab.com/3d-models/batman-mask-6cb464f240ee478cafe88e8d41229081",
+      "title": "Batman Mask"
+    },
+    "generator": "Sketchfab-15.53.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 41760,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 17280,
+      "byteOffset": 41760,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 51840,
+      "byteOffset": 59040,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 34560,
+      "byteOffset": 110880,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 145440,
+      "uri": "scene.bin"
+    }
+  ],
+  "extensionsUsed": [
+    "KHR_materials_specular"
+  ],
+  "images": [
+    {
+      "uri": "textures/obj_MISC_Clothing_MaskClothing_Mask_DC_Batmanmatnet1MAT_Clothing_Mask_DC_Batman_baseColor.png"
+    },
+    {
+      "uri": "textures/obj_MISC_Clothing_MaskClothing_Mask_DC_Batmanmatnet1MAT_Clothing_Mask_DC_Batman_normal.png"
+    },
+    {
+      "uri": "textures/obj_MISC_Clothing_MaskClothing_Mask_DC_Batmanmatnet1MAT_Clothing_Mask_DC_Batman_specularf0.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "extensions": {
+        "KHR_materials_specular": {
+          "specularColorFactor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "specularFactor": 1.0,
+          "specularTexture": {
+            "index": 2
+          }
+        }
+      },
+      "name": "obj_MISC_Clothing_MaskClothing_Mask_DC_Batmanmatnet1MAT_Clothing_Mask_DC_Batman",
+      "normalTexture": {
+        "index": 1
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0.608001852958028
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Object_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "6178a86cdf1d4cdcb7c36c91037c9407.obj.cleaner.materialmerger.gles"
+    },
+    {
+      "mesh": 0,
+      "name": "Object_2"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    }
+  ]
+}

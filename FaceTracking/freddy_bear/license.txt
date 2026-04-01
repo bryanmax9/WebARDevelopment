@@ -1,0 +1,11 @@
+Model Information:
+* title:	Freddy Bear Mask (Five Nights At Freddy)
+* source:	https://sketchfab.com/3d-models/freddy-bear-mask-five-nights-at-freddy-06584ce1e46e43f5b8439e15a42bc5ed
+* author:	David Wigforss (https://sketchfab.com/dwigfor)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Freddy Bear Mask (Five Nights At Freddy)" (https://sketchfab.com/3d-models/freddy-bear-mask-five-nights-at-freddy-06584ce1e46e43f5b8439e15a42bc5ed) by David Wigforss (https://sketchfab.com/dwigfor) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)

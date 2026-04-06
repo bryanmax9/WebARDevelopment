@@ -64,6 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
             btnFreddy.classList.remove('active');
         });
 
+        //SWitch caera logic(front & back camera for mobile phones):
+        document.querySelector("#switch").addEventListener("click", () =>{
+            mindarThree.switchCamera();
+        })
+
         await mindarThree.start();
         renderer.setAnimationLoop(() => {
             renderer.render(scene, camera);

@@ -1,3 +1,21 @@
 body {
     margin: 0;
+    overflow: hidden;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+#ar-button {
+    position: fixed;
+    z-index: 1001;
+    padding: 1vh;
+    bottom: 1vh;
+    left: 50%;
+    transform: translateX(-50%);
 }

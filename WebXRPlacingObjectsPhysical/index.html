@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="./main.js"></script>
+    <title>Web XR</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <!-- Splash screen shown before AR session -->
+    <div id="splash-overlay">
+        <div class="splash-bg">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+        </div>
+        <div class="splash-content">
+            <div class="splash-icon">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="32" cy="32" r="28" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+                    <path d="M20 44 L32 20 L44 44" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M23 38 H41" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="32" cy="32" r="3" fill="rgba(255,255,255,0.6)"/>
+                </svg>
+            </div>
+            <h1 class="splash-title">AR Space</h1>
+            <p class="splash-subtitle">Point your camera at any flat surface.<br>Objects will anchor to the real world.</p>
+            <div class="splash-steps">
+                <div class="step"><span class="step-num">1</span><span>Aim at a surface</span></div>
+                <div class="step"><span class="step-num">2</span><span>Wait for the ring</span></div>
+                <div class="step"><span class="step-num">3</span><span>Tap to place</span></div>
+            </div>
+            <button id="start-ar-btn">
+                <span class="btn-glow"></span>
+                <span class="btn-label">Enter AR</span>
+                <svg class="btn-arrow" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <p class="splash-note">Requires a WebXR-compatible device &amp; browser</p>
+        </div>
+    </div>
+
+    <!-- In-AR hint pill -->
+    <div id="tap-hint">Tap anywhere to place object</div>
+</body>
+</html>

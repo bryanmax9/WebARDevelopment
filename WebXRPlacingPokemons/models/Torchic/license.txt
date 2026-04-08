@@ -1,0 +1,11 @@
+Model Information:
+* title:	火稚雞 - 攻擊 アチャモ Torchic
+* source:	https://sketchfab.com/3d-models/torchic-1880fc2dffcc40708bab9bf8af1a7020
+* author:	A110082003 (https://sketchfab.com/A110082003)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "火稚雞 - 攻擊 アチャモ Torchic" (https://sketchfab.com/3d-models/torchic-1880fc2dffcc40708bab9bf8af1a7020) by A110082003 (https://sketchfab.com/A110082003) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

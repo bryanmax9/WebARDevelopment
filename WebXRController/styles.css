@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+#events{
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 30vh;
+    padding: 10px;
+    width: 50vw;
+    overflow: auto;
+    background: white;
+    z-index: 9999;
+}

@@ -1,0 +1,266 @@
+/* ─── Base ───────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #0a0a0f;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* ─── Hide the default ARButton — we drive it programmatically ── */
+#ARButton {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    position: fixed !important;
+    top: 16px !important;
+    right: 16px !important;
+    bottom: unset !important;
+    left: unset !important;
+    width: auto !important;
+    transition: opacity 0.3s;
+}
+
+/* Make it visible + clickable only when in-session (text = STOP AR) */
+#ARButton.ar-active {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    background: rgba(255, 60, 60, 0.18) !important;
+    border: 1.5px solid rgba(255, 100, 100, 0.55) !important;
+    border-radius: 50px !important;
+    padding: 10px 22px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.06em !important;
+    color: #fff !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    cursor: pointer !important;
+}
+
+/* ─── Splash overlay ─────────────────────────────────────────── */
+#splash-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Animated orb background */
+.splash-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 60%, #0d0d1a 0%, #060609 100%);
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.45;
+    animation: drift 10s ease-in-out infinite alternate;
+}
+.orb-1 {
+    width: 420px; height: 420px;
+    background: radial-gradient(circle, #3b2fff 0%, transparent 70%);
+    top: -120px; left: -100px;
+    animation-duration: 12s;
+}
+.orb-2 {
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, #8b2fff 0%, transparent 70%);
+    bottom: -80px; right: -80px;
+    animation-duration: 9s;
+    animation-delay: -4s;
+}
+.orb-3 {
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, #2fbfff 0%, transparent 70%);
+    top: 40%; left: 55%;
+    animation-duration: 14s;
+    animation-delay: -7s;
+}
+
+@keyframes drift {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(30px, 20px) scale(1.08); }
+}
+
+/* Content card */
+.splash-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 48px 36px 40px;
+    max-width: 380px;
+    width: 90%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 28px;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 24px 64px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+    animation: card-in 0.7s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+@keyframes card-in {
+    from { opacity: 0; transform: translateY(32px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Icon */
+.splash-icon {
+    width: 64px; height: 64px;
+    margin-bottom: 20px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 12px;
+}
+.splash-icon svg { width: 100%; height: 100%; }
+
+/* Title */
+.splash-title {
+    margin: 0 0 10px;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #fff;
+    text-shadow: 0 2px 20px rgba(100,100,255,0.4);
+}
+
+/* Subtitle */
+.splash-subtitle {
+    margin: 0 0 28px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.5);
+}
+
+/* Steps */
+.splash-steps {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 32px;
+    width: 100%;
+}
+.step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 10px 6px;
+}
+.step-num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(100, 80, 255, 0.3);
+    border: 1px solid rgba(120,100,255,0.5);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(180,170,255,0.9);
+}
+
+/* Start AR button */
+#start-ar-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    width: 100%;
+    justify-content: center;
+    background: linear-gradient(135deg, #5b4fff 0%, #8b2fff 100%);
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(91, 79, 255, 0.45);
+    transition: transform 0.15s, box-shadow 0.15s;
+    margin-bottom: 16px;
+}
+#start-ar-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(91, 79, 255, 0.6);
+}
+#start-ar-btn:active {
+    transform: translateY(0);
+}
+
+.btn-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% -20%, rgba(255,255,255,0.25) 0%, transparent 65%);
+    pointer-events: none;
+}
+.btn-label { position: relative; }
+.btn-arrow { width: 20px; height: 20px; flex-shrink: 0; position: relative; }
+
+/* Note */
+.splash-note {
+    margin: 0;
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+}
+
+/* Hide splash when AR is active */
+#splash-overlay.hidden {
+    display: none;
+}
+
+/* ─── In-AR tap hint pill ─────────────────────────────────────── */
+#tap-hint {
+    display: none;
+    position: fixed;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    padding: 12px 28px;
+    border-radius: 50px;
+    pointer-events: none;
+    white-space: nowrap;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    animation: pulse-hint 2.4s ease-in-out infinite;
+}
+#tap-hint.visible { display: block; }
+
+@keyframes pulse-hint {
+    0%, 100% { opacity: 0.75; transform: translateX(-50%) scale(1); }
+    50%       { opacity: 1;    transform: translateX(-50%) scale(1.03); }
+}

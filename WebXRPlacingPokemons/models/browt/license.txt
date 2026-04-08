@@ -1,0 +1,11 @@
+Model Information:
+* title:	Browt
+* source:	https://sketchfab.com/3d-models/browt-ed870ecb47f741fd8f047a66742c4c73
+* author:	Pineopal (https://sketchfab.com/Pineopal)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Browt" (https://sketchfab.com/3d-models/browt-ed870ecb47f741fd8f047a66742c4c73) by Pineopal (https://sketchfab.com/Pineopal) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

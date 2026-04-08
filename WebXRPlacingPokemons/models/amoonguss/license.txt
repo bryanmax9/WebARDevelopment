@@ -1,0 +1,11 @@
+Model Information:
+* title:	Amoonguss
+* source:	https://sketchfab.com/3d-models/amoonguss-d241a1b13a8a41748830084da231f95d
+* author:	Pixelmon_Dump (https://sketchfab.com/Pixelmon_dump)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Amoonguss" (https://sketchfab.com/3d-models/amoonguss-d241a1b13a8a41748830084da231f95d) by Pixelmon_Dump (https://sketchfab.com/Pixelmon_dump) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

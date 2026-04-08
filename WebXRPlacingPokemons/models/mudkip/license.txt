@@ -1,0 +1,11 @@
+Model Information:
+* title:	水躍魚 - 攻擊 ミズゴロウ Mudkip
+* source:	https://sketchfab.com/3d-models/mudkip-e0b26c49ae5649099776e6fceeff8167
+* author:	A110082003 (https://sketchfab.com/A110082003)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "水躍魚 - 攻擊 ミズゴロウ Mudkip" (https://sketchfab.com/3d-models/mudkip-e0b26c49ae5649099776e6fceeff8167) by A110082003 (https://sketchfab.com/A110082003) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

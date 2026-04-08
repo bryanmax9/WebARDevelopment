@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Import map must come before any module scripts -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.132.2/build/three.module.js",
+            "three/examples/jsm/loaders/GLTFLoader.js": "https://unpkg.com/three@0.132.2/examples/jsm/loaders/GLTFLoader.js",
+            "three/examples/jsm/utils/SkeletonUtils.js": "https://unpkg.com/three@0.132.2/examples/jsm/utils/SkeletonUtils.js"
+        }
+    }
+    </script>
+    <script type="module" src="./main.js"></script>
+    <title>Pokémon AR</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <!-- Splash screen shown before AR session -->
+    <div id="splash-overlay">
+        <div class="splash-bg">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+        </div>
+        <div class="splash-content">
+            <div class="splash-icon">
+                <!-- Pokéball icon -->
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="32" cy="32" r="26" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+                    <path d="M6 32 Q6 6 32 6 Q58 6 58 32" stroke="rgba(255,80,80,0.6)" stroke-width="2" fill="none"/>
+                    <path d="M6 32 Q6 58 32 58 Q58 58 58 32" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none"/>
+                    <line x1="6" y1="32" x2="24" y2="32" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+                    <line x1="40" y1="32" x2="58" y2="32" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+                    <circle cx="32" cy="32" r="8" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="rgba(255,255,255,0.07)"/>
+                    <circle cx="32" cy="32" r="4" fill="rgba(255,255,255,0.7)"/>
+                </svg>
+            </div>
+            <h1 class="splash-title">Pokémon AR</h1>
+            <p class="splash-subtitle">Place your favourite Pokémon in the real world.<br>They'll come to life with animations!</p>
+            <div class="splash-steps">
+                <div class="step"><span class="step-num">1</span><span>Pick a Pokémon</span></div>
+                <div class="step"><span class="step-num">2</span><span>Aim at surface</span></div>
+                <div class="step"><span class="step-num">3</span><span>Tap to place</span></div>
+            </div>
+            <button id="start-ar-btn">
+                <span class="btn-glow"></span>
+                <span class="btn-label">Choose Pokémon</span>
+                <svg class="btn-arrow" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <p class="splash-note">Requires a WebXR-compatible device &amp; browser</p>
+        </div>
+    </div>
+
+    <!-- Pokémon character picker -->
+    <div id="pokemon-picker" class="hidden">
+        <div class="picker-bg">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+        </div>
+        <div class="picker-content">
+            <button id="picker-back" class="picker-back" aria-label="Back">
+                <svg viewBox="0 0 20 20" fill="none" width="20" height="20">
+                    <path d="M12 5l-5 5 5 5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <h2 class="picker-title">Choose Your Pokémon</h2>
+            <p class="picker-sub">Select a character to place in AR</p>
+            <div class="pokemon-grid" id="pokemon-grid"></div>
+            <button id="confirm-pokemon-btn" class="confirm-btn">
+                <span class="btn-glow"></span>
+                <span id="confirm-btn-label" class="btn-label">Enter AR</span>
+                <svg class="btn-arrow" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- In-AR hint pill -->
+    <div id="tap-hint">Tap to place Pokémon</div>
+
+    <!-- In-AR Pokémon switcher -->
+    <div id="ar-switcher">
+        <button id="toggle-switcher" class="switcher-toggle">
+            <svg viewBox="0 0 20 20" fill="none" width="18" height="18">
+                <circle cx="10" cy="10" r="8.5" stroke="white" stroke-width="1.4"/>
+                <line x1="1.5" y1="10" x2="18.5" y2="10" stroke="white" stroke-width="1.4"/>
+                <circle cx="10" cy="10" r="2.8" fill="white"/>
+            </svg>
+            <span id="switcher-name">Bulbasaur</span>
+            <svg id="switcher-chevron" viewBox="0 0 12 12" fill="none" width="12" height="12" style="transition:transform 0.25s">
+                <path d="M2 4l4 4 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <div id="switcher-grid" class="collapsed"></div>
+    </div>
+</body>
+</html>

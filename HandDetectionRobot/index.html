@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Gesture Interface — RX-7</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <!-- TensorFlow.js core — MUST load before handpose (handpose@0.0.6 needs tfjs ^2.x) -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.8.6/dist/tf.min.js"></script>
+    <!-- Handpose & Fingerpose (globals: handpose, fp) -->
+    <script src="https://unpkg.com/@tensorflow-models/handpose@0.0.6/dist/handpose.js"></script>
+    <script src="./libs/fingerpose.js"></script>
+
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="scripts.js"></script>
+</head>
+<body>
+
+    <!-- ── Splash screen (shows first, hides after user taps START) ──── -->
+    <div id="splash-screen">
+        <div class="splash-inner">
+
+            <div class="splash-logo">RX<span>7</span></div>
+            <div class="splash-title">NEURAL GESTURE INTERFACE</div>
+            <div class="splash-tagline">Control a robot with your bare hand</div>
+
+            <div class="splash-divider"></div>
+
+            <p class="splash-section-label">GESTURE CONTROLS</p>
+            <div class="splash-gestures">
+                <div class="splash-card">
+                    <span class="splash-emoji">🖐</span>
+                    <span class="splash-gname">OPEN HAND UP</span>
+                    <span class="splash-gact">WAVE</span>
+                </div>
+                <div class="splash-card">
+                    <span class="splash-emoji">☝</span>
+                    <span class="splash-gname">INDEX FINGER UP</span>
+                    <span class="splash-gact">JUMP</span>
+                </div>
+                <div class="splash-card">
+                    <span class="splash-emoji">👍</span>
+                    <span class="splash-gname">THUMBS UP</span>
+                    <span class="splash-gact">APPROVE</span>
+                </div>
+                <div class="splash-card">
+                    <span class="splash-emoji splash-emoji-sideways">🤚</span>
+                    <span class="splash-gname">HAND SIDEWAYS</span>
+                    <span class="splash-gact">SHUTDOWN</span>
+                </div>
+            </div>
+
+            <p class="splash-tip">📷 Camera permission required — point your hand at the camera</p>
+
+            <button id="splash-start" class="splash-btn">▶ &nbsp;LAUNCH INTERFACE</button>
+
+        </div>
+    </div>
+
+    <!-- ── Loading overlay (hidden until splash dismissed) ──────────────── -->
+    <div id="loading-overlay" style="display:none">
+        <div class="loader-inner">
+            <div class="loader-hex">
+                <div class="hex-ring hex-1"></div>
+                <div class="hex-ring hex-2"></div>
+                <div class="loader-core">RX<span>7</span></div>
+            </div>
+            <div class="loader-title">NEURAL GESTURE INTERFACE</div>
+            <div class="loader-status" id="loading-status">Initializing system…</div>
+            <div class="loader-bar-wrap"><div class="loader-bar" id="loader-bar"></div></div>
+        </div>
+    </div>
+
+    <!-- ── Three.js canvas ──────────────────────────────────────────────── -->
+    <div id="scene-container"></div>
+
+    <!-- ── Overlay effects ──────────────────────────────────────────────── -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+
+    <!-- ── Corner brackets ──────────────────────────────────────────────── -->
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+
+    <!-- ── Mobile gesture panel toggle (hidden on desktop) ────────────── -->
+    <button id="gesture-toggle" class="gesture-toggle" aria-label="Show gesture reference">
+        ☰ GESTURES
+    </button>
+
+    <!-- ── HUD ──────────────────────────────────────────────────────────── -->
+    <div class="hud">
+
+        <!-- Top bar -->
+        <header class="hud-top">
+            <div class="brand">
+                <div class="brand-logo">RX<span>7</span></div>
+                <div class="brand-titles">
+                    <div class="title-main">NEURAL GESTURE INTERFACE</div>
+                    <div class="title-sub">INTERACTIVE ROBOT CONTROL SYSTEM · v2.4.1</div>
+                </div>
+            </div>
+            <div class="sys-status">
+                <div class="status-row">
+                    <div class="dot" id="dot-system"></div>
+                    <span id="status-text">INITIALIZING NEURAL NETWORK…</span>
+                </div>
+                <div class="status-row">
+                    <div class="dot" id="dot-hand"></div>
+                    <span id="hand-status">CAMERA STARTING…</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Left panel — gesture reference -->
+        <aside class="hud-panel panel-left">
+            <button class="panel-close" id="panel-close" aria-label="Close">✕ CLOSE</button>
+            <div class="panel-header">GESTURE COMMANDS</div>
+            <ul class="gesture-list">
+                <li class="gesture-row" id="g-wave">
+                    <span class="g-icon">🖐</span>
+                    <span class="g-info">
+                        <span class="g-name">OPEN HAND UP</span>
+                        <span class="g-sub">All fingers vertical</span>
+                    </span>
+                    <span class="g-action">WAVE</span>
+                </li>
+                <li class="gesture-row" id="g-jump">
+                    <span class="g-icon">☝</span>
+                    <span class="g-info">
+                        <span class="g-name">INDEX POINT</span>
+                        <span class="g-sub">One finger up</span>
+                    </span>
+                    <span class="g-action">JUMP</span>
+                </li>
+                <li class="gesture-row" id="g-thumbs">
+                    <span class="g-icon">👍</span>
+                    <span class="g-info">
+                        <span class="g-name">THUMBS UP</span>
+                        <span class="g-sub">Thumb extended</span>
+                    </span>
+                    <span class="g-action">APPROVE</span>
+                </li>
+                <li class="gesture-row" id="g-die">
+                    <span class="g-icon g-icon-sideways">🤚</span>
+                    <span class="g-info">
+                        <span class="g-name">FLAT SIDEWAYS</span>
+                        <span class="g-sub">Rotate hand horizontal ↔</span>
+                    </span>
+                    <span class="g-action">DIE</span>
+                </li>
+            </ul>
+
+            <div class="panel-header" style="margin-top:8px">UNIT SPECS</div>
+            <div class="spec-grid">
+                <span class="spec-key">MODEL</span><span class="spec-val">RX-7 EXPRESSIVE</span>
+                <span class="spec-key">ENGINE</span><span class="spec-val">THREE.JS r132</span>
+                <span class="spec-key">NEURAL</span><span class="spec-val">HANDPOSE v0.0.6</span>
+                <span class="spec-key">GESTURE</span><span class="spec-val">FINGERPOSE v2</span>
+            </div>
+        </aside>
+
+        <!-- Right panel -->
+        <aside class="hud-panel panel-right">
+            <div class="panel-header">ACTIVE STATE</div>
+            <div class="active-block">
+                <div class="active-name" id="gesture-name">IDLE</div>
+                <div class="active-desc" id="gesture-desc">Awaiting hand input…</div>
+            </div>
+
+            <div class="panel-header" style="margin-top:14px">CAMERA FEED</div>
+            <div class="cam-wrap">
+                <video id="cam-video" autoplay playsinline muted></video>
+                <div class="cam-overlay-grid"></div>
+                <div class="cam-corner cam-tl"></div>
+                <div class="cam-corner cam-tr"></div>
+                <div class="cam-corner cam-bl"></div>
+                <div class="cam-corner cam-br"></div>
+                <div class="cam-label">LIVE · HANDPOSE</div>
+            </div>
+
+            <div class="panel-header" style="margin-top:14px">SIGNAL METRICS</div>
+            <div class="bar-row">
+                <span class="bar-label">DETECT</span>
+                <div class="bar-track"><div class="bar-fill" id="bar-confidence" style="width:0%"></div></div>
+                <span class="bar-val" id="bar-val">--</span>
+            </div>
+            <div class="bar-row" style="margin-top:6px">
+                <span class="bar-label">TF CORE</span>
+                <div class="bar-track"><div class="bar-fill bar-tf" style="width:100%"></div></div>
+                <span class="bar-val">OK</span>
+            </div>
+        </aside>
+
+        <!-- Bottom bar -->
+        <footer class="hud-bottom">
+            <span>UNIT · RX-7</span>
+            <span class="pipe bot-detail">|</span>
+            <span class="bot-detail">THREE.JS · r132</span>
+            <span class="pipe bot-detail">|</span>
+            <span class="bot-detail">TENSORFLOW HANDPOSE</span>
+            <span class="pipe bot-detail">|</span>
+            <span class="bot-detail">FINGERPOSE ENGINE</span>
+            <span class="pipe">|</span>
+            <span id="fps-display">FPS · --</span>
+        </footer>
+
+    </div><!-- /hud -->
+
+</body>
+</html>

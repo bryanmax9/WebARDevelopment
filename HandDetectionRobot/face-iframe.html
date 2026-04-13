@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!--
+    face-api.js 0.22.2 (justadudewhohacks original) requires TF.js 1.x.
+    Loading both from CDN here — completely isolated from the main page's
+    TF.js 2.8.6, which handpose needs.  No WASM, no WebGL backend conflicts.
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.7.4/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+</head>
+<body>
+<script>
+(async () => {
+  const INTERVAL_MS    = 280;   // ~3.5 Hz — light on CPU, real-time feel
+  const INPUT_SIZE     = 320;   // bigger = better range, slightly slower
+  const SCORE_THRESH   = 0.22;  // low threshold catches faces further away
+
+  try {
+    // Models live next to this HTML file — same server, no CORS issues
+    const MODEL_PATH = './assets/facemodel';
+    await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_PATH);
+    await faceapi.nets.faceExpressionNet.loadFromUri(MODEL_PATH);
+
+    window.parent.postMessage({ type: 'face-ready' }, '*');
+
+    const opts = new faceapi.TinyFaceDetectorOptions({
+      inputSize:      INPUT_SIZE,
+      scoreThreshold: SCORE_THRESH,
+    });
+
+    let busy = false;
+
+    const detect = async () => {
+      if (!busy) {
+        busy = true;
+        try {
+          // Access parent page's video directly — same origin, works fine
+          const video = window.parent.document.getElementById('cam-video');
+          if (video && video.readyState >= 2) {
+            const result = await faceapi
+              .detectSingleFace(video, opts)
+              .withFaceExpressions();
+
+            if (result && result.expressions) {
+              window.parent.postMessage({
+                type:        'emotion',
+                expressions: result.expressions,
+              }, '*');
+            } else {
+              window.parent.postMessage({ type: 'no-face' }, '*');
+            }
+          }
+        } catch (frameErr) {
+          // Skip bad frame silently
+        } finally {
+          busy = false;
+        }
+      }
+      setTimeout(detect, INTERVAL_MS);
+    };
+
+    // Brief warmup delay so the video stream is fully active
+    setTimeout(detect, 1800);
+
+  } catch (err) {
+    window.parent.postMessage({ type: 'face-error', message: String(err) }, '*');
+    console.error('[face-iframe]', err);
+  }
+})();
+</script>
+</body>
+</html>
